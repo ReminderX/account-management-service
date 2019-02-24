@@ -1,0 +1,39 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.4'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+group 'com.reminderx'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    compile 'org.slf4j:slf4j-simple:1.7.25'
+    compile 'com.sparkjava:spark-core:2.8.0'
+    compile 'com.google.inject:guice:4.2.2'
+    compile 'com.google.code.gson:gson:2.8.5'
+    compile 'org.glassfish:javax.el:3.0.1-b11'
+    compile 'org.hibernate.validator:hibernate-validator:6.0.15.Final'
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.googlecode.catch-exception:catch-exception:1.2.0'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.reminderx.accountservice.Application'
+    }
+}
