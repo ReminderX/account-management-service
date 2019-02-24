@@ -4,10 +4,12 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.reminderx.accountservice.controller.JsonResponseTransformer;
 import com.reminderx.accountservice.domain.Account;
+import com.reminderx.accountservice.helper.ConfigurationHelper;
 import com.reminderx.accountservice.helper.JsonMapper;
 import com.reminderx.accountservice.helper.RequestValidator;
 import com.reminderx.accountservice.helper.impl.JsonMapperImpl;
 import com.reminderx.accountservice.helper.impl.RequestValidatorImpl;
+import com.reminderx.accountservice.properties.ServerProperties;
 import com.reminderx.accountservice.repository.AccountRepository;
 import com.reminderx.accountservice.repository.impl.AccountRepositoryImpl;
 import com.reminderx.accountservice.sample.Samples;
@@ -19,6 +21,8 @@ import javax.inject.Singleton;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
+import static com.reminderx.accountservice.environment.VariableConst.CONFIGURATION;
+
 public class BasicModule extends AbstractModule {
     @Override
     protected void configure() {
@@ -26,6 +30,13 @@ public class BasicModule extends AbstractModule {
         bind(RequestValidator.class).to(RequestValidatorImpl.class).in(Singleton.class);
         bind(ResponseTransformer.class).to(JsonResponseTransformer.class).in(Singleton.class);
         bind(FundService.class).to(FundServiceImpl.class).in(Singleton.class);
+    }
+
+    @Provides
+    @Singleton
+    public ServerProperties serverProperties() throws InstantiationException, IllegalAccessException {
+        final String configurationPath = System.getProperty(CONFIGURATION);
+        return ConfigurationHelper.getConfiguration(configurationPath, ServerProperties.class);
     }
 
     @Provides

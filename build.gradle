@@ -28,6 +28,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.5'
     compile 'org.glassfish:javax.el:3.0.1-b11'
     compile 'org.hibernate.validator:hibernate-validator:6.0.15.Final'
+    compile 'org.yaml:snakeyaml:1.23'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
     testCompile 'junit:junit:4.12'
     testCompile 'com.googlecode.catch-exception:catch-exception:1.2.0'
 }
