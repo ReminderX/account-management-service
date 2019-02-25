@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import com.reminderx.accountservice.controller.Controller;
 import com.reminderx.accountservice.controller.impl.ExceptionController;
 import com.reminderx.accountservice.controller.impl.FundController;
+import com.reminderx.accountservice.controller.impl.ServiceController;
 import com.reminderx.accountservice.module.BasicModule;
 import com.reminderx.accountservice.properties.ServerProperties;
 
@@ -21,6 +22,9 @@ public class Application {
 
         final Controller fundController = injector.getInstance(FundController.class);
         fundController.setupEndpoints();
+
+        final Controller serviceController = injector.getInstance(ServiceController.class);
+        serviceController.setupEndpoints();
 
         final Controller exceptionController = injector.getInstance(ExceptionController.class);
         exceptionController.setupEndpoints();

@@ -19,13 +19,13 @@ public class ExceptionController implements Controller {
 
     @Override
     public void setupEndpoints() {
-        notFound((req, res) -> {
-            res.type(APPLICATION_JSON);
+        notFound((request, response) -> {
+            response.type(APPLICATION_JSON);
             return jsonMapper.serialize(new ErrorResponse("Route not found"));
         });
 
-        internalServerError((req, res) -> {
-            res.type(APPLICATION_JSON);
+        internalServerError((request, response) -> {
+            response.type(APPLICATION_JSON);
             return jsonMapper.serialize(new ErrorResponse("Internal server error"));
         });
     }
