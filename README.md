@@ -3,7 +3,7 @@ Lightweight RESTful API for the bank account management. It's based on Spark mic
 ## Building and Execution
 API supports standalone run after uber JAR build:
 1. Run ```./gradlew shadowJar``` to build full JAR.
-2. Run ```./gaccount-service.sh``` to run server process.
+2. Run ```./account-service.sh``` to run server process.
 ## Communication examples
 For all requests header "**Content-Type: application/json**" must be set.
 
