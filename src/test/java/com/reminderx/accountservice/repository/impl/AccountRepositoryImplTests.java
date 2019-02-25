@@ -9,9 +9,9 @@ import org.junit.Test;
 
 public class AccountRepositoryImplTests {
     private final static String FIRST_ACCOUNT_NUMBER = "4377380078789898";
-    private final static double FIRST_ACCOUNT_FUND = 10000.0;
+    private final static long FIRST_ACCOUNT_FUND = 10000L;
     private final static String SECOND_ACCOUNT_NUMBER = "4377380078782323";
-    private final static double SECOND_ACCOUNT_FUND = 33000.0;
+    private final static long SECOND_ACCOUNT_FUND = 33000L;
 
     private final static String UNKNOWN_ACCOUNT_NUMBER = "4377380055554444";
 

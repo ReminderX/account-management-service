@@ -1,7 +1,7 @@
 package com.reminderx.accountservice.exception;
 
-public class DuplicateAccountException extends RuntimeException implements CustomException {
+public class DuplicateAccountException extends BusinessException {
     public DuplicateAccountException(String number) {
-        super(String.format("Account %s is already exists.", number));
+        super(String.format("Account %s is already exists", number));
     }
 }

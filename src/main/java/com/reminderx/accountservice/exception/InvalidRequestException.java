@@ -1,7 +1,7 @@
 package com.reminderx.accountservice.exception;
 
-public class InvalidRequestException extends RuntimeException implements CustomException {
+public class InvalidRequestException extends RuntimeException {
     public InvalidRequestException() {
-        super("Invalid request content.");
+        super("Invalid request content");
     }
 }

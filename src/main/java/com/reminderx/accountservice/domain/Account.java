@@ -5,9 +5,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class Account {
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
     private final String number;
-    private double fund;
+    private long fund;
 
-    public Account(String number, double fund) {
+    public Account(String number, long fund) {
         this.number = number;
         this.fund = fund;
     }
@@ -16,11 +16,11 @@ public class Account {
         return number;
     }
 
-    public double getFund() {
+    public long getFund() {
         return fund;
     }
 
-    public void setFund(double fund) {
+    public void setFund(long fund) {
         this.fund = fund;
     }
 

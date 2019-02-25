@@ -16,9 +16,9 @@ import static org.junit.Assert.assertThat;
 
 public class FundServiceImplTests {
     private final static String FIRST_ACCOUNT_NUMBER = "4377380078789898";
-    private final static double FIRST_ACCOUNT_FUND = 10000.0;
+    private final static long FIRST_ACCOUNT_FUND = 10000L;
     private final static String SECOND_ACCOUNT_NUMBER = "4377380078782323";
-    private final static double SECOND_ACCOUNT_FUND = 33000.0;
+    private final static long SECOND_ACCOUNT_FUND = 33000L;
 
     private final static String FIRST_UNKNOWN_ACCOUNT_NUMBER = "4377380055554444";
     private final static String SECOND_UNKNOWN_ACCOUNT_NUMBER = "4377380055557777";
@@ -44,23 +44,23 @@ public class FundServiceImplTests {
     // Correct deposit test
     @Test
     public void doDepositTest() {
-        assertThat(fundService.deposit(FIRST_ACCOUNT_NUMBER, 2000.0), is(equalTo(12000.0)));
-        assertThat(fundService.balance(FIRST_ACCOUNT_NUMBER), is(equalTo(12000.0)));
+        assertThat(fundService.deposit(FIRST_ACCOUNT_NUMBER, 2000L), is(equalTo(12000L)));
+        assertThat(fundService.balance(FIRST_ACCOUNT_NUMBER), is(equalTo(12000L)));
     }
 
     // Correct withdraw test
     @Test
     public void doWithdrawTest() {
-        assertThat(fundService.withdraw(FIRST_ACCOUNT_NUMBER, 2000.0), is(equalTo(8000.0)));
-        assertThat(fundService.balance(FIRST_ACCOUNT_NUMBER), is(equalTo(8000.0)));
+        assertThat(fundService.withdraw(FIRST_ACCOUNT_NUMBER, 2000L), is(equalTo(8000L)));
+        assertThat(fundService.balance(FIRST_ACCOUNT_NUMBER), is(equalTo(8000L)));
     }
 
     // Correct transfer test
     @Test
     public void doTransferTest() {
-        fundService.transfer(FIRST_ACCOUNT_NUMBER, SECOND_ACCOUNT_NUMBER, 4000.0);
-        assertThat(fundService.balance(FIRST_ACCOUNT_NUMBER), is(equalTo(6000.0)));
-        assertThat(fundService.balance(SECOND_ACCOUNT_NUMBER), is(equalTo(37000.0)));
+        fundService.transfer(FIRST_ACCOUNT_NUMBER, SECOND_ACCOUNT_NUMBER, 4000L);
+        assertThat(fundService.balance(FIRST_ACCOUNT_NUMBER), is(equalTo(6000L)));
+        assertThat(fundService.balance(SECOND_ACCOUNT_NUMBER), is(equalTo(37000L)));
     }
 
     // Failed balance of unknown account test
@@ -73,21 +73,21 @@ public class FundServiceImplTests {
     // Failed deposit to unknown account test
     @Test
     public void doDepositToUnknownAccountTest() {
-        catchException(fundService).deposit(FIRST_UNKNOWN_ACCOUNT_NUMBER, 2000.0);
+        catchException(fundService).deposit(FIRST_UNKNOWN_ACCOUNT_NUMBER, 2000L);
         assertThat(caughtException(), instanceOf(AccountNotFoundException.class));
     }
 
     // Failed withdraw from unknown account test
     @Test
     public void doWithdrawFromUnknownAccountTest() {
-        catchException(fundService).withdraw(FIRST_UNKNOWN_ACCOUNT_NUMBER, 2000.0);
+        catchException(fundService).withdraw(FIRST_UNKNOWN_ACCOUNT_NUMBER, 2000L);
         assertThat(caughtException(), instanceOf(AccountNotFoundException.class));
     }
 
     // Failed too large withdraw from known account with balance check test
     @Test
     public void doTooLargeWithdrawTest() {
-        catchException(fundService).withdraw(FIRST_ACCOUNT_NUMBER, 30000.0);
+        catchException(fundService).withdraw(FIRST_ACCOUNT_NUMBER, 30000L);
         assertThat(caughtException(), instanceOf(NotEnoughFundsException.class));
         assertThat(fundService.balance(FIRST_ACCOUNT_NUMBER), is(equalTo(FIRST_ACCOUNT_FUND)));
     }
@@ -95,7 +95,7 @@ public class FundServiceImplTests {
     // Failed too large transfer between known accounts with balance check test
     @Test
     public void doTooLargeTransferTest() {
-        catchException(fundService).transfer(FIRST_ACCOUNT_NUMBER, SECOND_ACCOUNT_NUMBER, 30000.0);
+        catchException(fundService).transfer(FIRST_ACCOUNT_NUMBER, SECOND_ACCOUNT_NUMBER, 30000L);
         assertThat(caughtException(), instanceOf(NotEnoughFundsException.class));
         assertThat(fundService.balance(FIRST_ACCOUNT_NUMBER), is(equalTo(FIRST_ACCOUNT_FUND)));
         assertThat(fundService.balance(SECOND_ACCOUNT_NUMBER), is(equalTo(SECOND_ACCOUNT_FUND)));
@@ -104,7 +104,7 @@ public class FundServiceImplTests {
     // Failed transfer from known account to unknown account with known account balance check test
     @Test
     public void doTransferToUnknownAccountTest() {
-        catchException(fundService).transfer(FIRST_ACCOUNT_NUMBER, FIRST_UNKNOWN_ACCOUNT_NUMBER, 2000.0);
+        catchException(fundService).transfer(FIRST_ACCOUNT_NUMBER, FIRST_UNKNOWN_ACCOUNT_NUMBER, 2000L);
         assertThat(caughtException(), instanceOf(AccountNotFoundException.class));
         assertThat(fundService.balance(FIRST_ACCOUNT_NUMBER), is(equalTo(FIRST_ACCOUNT_FUND)));
     }
@@ -112,7 +112,7 @@ public class FundServiceImplTests {
     // Failed transfer from unknown account to known account with known account balance check test
     @Test
     public void doTransferFromUnknownAccountTest() {
-        catchException(fundService).transfer(FIRST_UNKNOWN_ACCOUNT_NUMBER, FIRST_ACCOUNT_NUMBER, 2000.0);
+        catchException(fundService).transfer(FIRST_UNKNOWN_ACCOUNT_NUMBER, FIRST_ACCOUNT_NUMBER, 2000L);
         assertThat(caughtException(), instanceOf(AccountNotFoundException.class));
         assertThat(fundService.balance(FIRST_ACCOUNT_NUMBER), is(equalTo(FIRST_ACCOUNT_FUND)));
     }
@@ -120,7 +120,7 @@ public class FundServiceImplTests {
     // Failed transfer between unknown accounts test
     @Test
     public void doTransferBetweenUnknownAccountsTest() {
-        catchException(fundService).transfer(FIRST_UNKNOWN_ACCOUNT_NUMBER, SECOND_UNKNOWN_ACCOUNT_NUMBER, 2000.0);
+        catchException(fundService).transfer(FIRST_UNKNOWN_ACCOUNT_NUMBER, SECOND_UNKNOWN_ACCOUNT_NUMBER, 2000L);
         assertThat(caughtException(), instanceOf(AccountNotFoundException.class));
     }
 }

@@ -12,15 +12,15 @@ public class SuccessResponse {
         this.data = null;
     }
 
-    public SuccessResponse(double fund) {
+    public SuccessResponse(long fund) {
         this.status = OK;
         this.data = new SuccessData(fund);
     }
 
     private class SuccessData {
-        private double fund;
+        private long fund;
 
-        private SuccessData(double fund) {
+        private SuccessData(long fund) {
             this.fund = fund;
         }
     }

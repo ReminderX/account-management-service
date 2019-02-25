@@ -3,7 +3,7 @@ package com.reminderx.accountservice.properties;
 @SuppressWarnings("unused")
 public class ServerProperties {
     private String ip = "0.0.0.0";
-    private int port = 8080;
+    private int port = 8089;
 
     public String getIp() {
         return ip;

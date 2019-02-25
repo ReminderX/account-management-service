@@ -16,7 +16,7 @@ public class FundServiceImpl implements FundService {
     }
 
     @Override
-    public double balance(String number) {
+    public long balance(String number) {
         final Account account = accountRepository.get(number);
         account.lockRead();
         try {
@@ -27,11 +27,11 @@ public class FundServiceImpl implements FundService {
     }
 
     @Override
-    public double deposit(String number, double fund) {
+    public long deposit(String number, long fund) {
         final Account account = accountRepository.get(number);
         account.lockWrite();
         try {
-            final double newFund = account.getFund() + fund;
+            final long newFund = account.getFund() + fund;
             account.setFund(newFund);
             return newFund;
         } finally {
@@ -40,7 +40,7 @@ public class FundServiceImpl implements FundService {
     }
 
     @Override
-    public double withdraw(String number, double fund) {
+    public long withdraw(String number, long fund) {
         final Account account = accountRepository.get(number);
         account.lockWrite();
         try {
@@ -48,7 +48,7 @@ public class FundServiceImpl implements FundService {
                 throw new NotEnoughFundsException(number);
             }
 
-            final double newFund = account.getFund() - fund;
+            final long newFund = account.getFund() - fund;
             account.setFund(newFund);
             return newFund;
         } finally {
@@ -57,7 +57,7 @@ public class FundServiceImpl implements FundService {
     }
 
     @Override
-    public void transfer(String from, String to, double fund) {
+    public void transfer(String from, String to, long fund) {
         if (!from.equals(to)) {
             final Account sourceAccount = accountRepository.get(from);
             final Account targetAccount = accountRepository.get(to);

@@ -1,7 +1,7 @@
 package com.reminderx.accountservice.exception;
 
-public class AccountNotFoundException extends RuntimeException implements CustomException {
+public class AccountNotFoundException extends BusinessException {
     public AccountNotFoundException(String number) {
-        super(String.format("Account %s was not found.", number));
+        super(String.format("Account %s was not found", number));
     }
 }

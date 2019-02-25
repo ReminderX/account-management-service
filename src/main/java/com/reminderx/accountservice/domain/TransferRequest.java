@@ -14,9 +14,9 @@ public class TransferRequest {
     private final String to;
 
     @Min(0)
-    private final double fund;
+    private final long fund;
 
-    public TransferRequest(String from, String to, double fund) {
+    public TransferRequest(String from, String to, long fund) {
         this.from = from;
         this.to = to;
         this.fund = fund;
@@ -30,7 +30,7 @@ public class TransferRequest {
         return to;
     }
 
-    public double getFund() {
+    public long getFund() {
         return fund;
     }
 }

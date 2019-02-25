@@ -21,6 +21,8 @@ import javax.inject.Singleton;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
+import java.io.FileNotFoundException;
+
 import static com.reminderx.accountservice.environment.VariableConst.CONFIGURATION;
 
 public class BasicModule extends AbstractModule {
@@ -34,7 +36,8 @@ public class BasicModule extends AbstractModule {
 
     @Provides
     @Singleton
-    public ServerProperties serverProperties() throws InstantiationException, IllegalAccessException {
+    public ServerProperties serverProperties()
+            throws InstantiationException, IllegalAccessException, FileNotFoundException {
         final String configurationPath = System.getProperty(CONFIGURATION);
         return ConfigurationHelper.getConfiguration(configurationPath, ServerProperties.class);
     }

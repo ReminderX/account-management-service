@@ -10,9 +10,9 @@ public class DepositWithdrawRequest {
     private final String number;
 
     @Min(0)
-    private final double fund;
+    private final long fund;
 
-    public DepositWithdrawRequest(String number, double fund) {
+    public DepositWithdrawRequest(String number, long fund) {
         this.number = number;
         this.fund = fund;
     }
@@ -21,7 +21,7 @@ public class DepositWithdrawRequest {
         return number;
     }
 
-    public double getFund() {
+    public long getFund() {
         return fund;
     }
 }

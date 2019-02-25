@@ -33,34 +33,34 @@ public class FundController extends AbstractController implements Controller {
     @Override
     public void setupEndpoints() {
         post(API_V1 + BALANCE, APPLICATION_JSON,
-                ((request, response) -> handleRequest(request.body(), BalanceRequest.class, this::balanceHandler)),
+                ((request, response) -> handleRequest(request, response, BalanceRequest.class, this::balanceHandler)),
                 jsonResponseTransformer);
 
         post(API_V1 + DEPOSIT, APPLICATION_JSON,
-                ((request, response) -> handleRequest(request.body(), DepositWithdrawRequest.class, this::depositHandler)),
+                ((request, response) -> handleRequest(request, response, DepositWithdrawRequest.class, this::depositHandler)),
                 jsonResponseTransformer);
 
         post(API_V1 + WITHDRAW, APPLICATION_JSON,
-                ((request, response) -> handleRequest(request.body(), DepositWithdrawRequest.class, this::withdrawHandler)),
+                ((request, response) -> handleRequest(request, response, DepositWithdrawRequest.class, this::withdrawHandler)),
                 jsonResponseTransformer);
 
         post(API_V1 + TRANSFER, APPLICATION_JSON,
-                ((request, response) -> handleRequest(request.body(), TransferRequest.class, this::transferHandler)),
+                ((request, response) -> handleRequest(request, response, TransferRequest.class, this::transferHandler)),
                 jsonResponseTransformer);
     }
 
     private SuccessResponse balanceHandler(BalanceRequest request) {
-        final double fund = fundService.balance(request.getNumber());
+        final long fund = fundService.balance(request.getNumber());
         return new SuccessResponse(fund);
     }
 
     private SuccessResponse depositHandler(DepositWithdrawRequest request) {
-        final double fund = fundService.deposit(request.getNumber(), request.getFund());
+        final long fund = fundService.deposit(request.getNumber(), request.getFund());
         return new SuccessResponse(fund);
     }
 
     private SuccessResponse withdrawHandler(DepositWithdrawRequest request) {
-        final double fund = fundService.withdraw(request.getNumber(), request.getFund());
+        final long fund = fundService.withdraw(request.getNumber(), request.getFund());
         return new SuccessResponse(fund);
     }
 
